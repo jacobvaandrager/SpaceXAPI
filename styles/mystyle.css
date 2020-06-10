@@ -1,0 +1,219 @@
+
+body {
+
+	font-family: 'Inter', sans-serif;
+	background: black;
+	color: #222;
+}
+
+h1 {
+
+	color: orange;
+	font-size: 100px;
+	position: relative;
+	text-transform: uppercase;  
+}
+
+h2 {
+
+	color: orange;
+	font-size: 20px;
+	position: relative;
+
+}
+
+h3 {
+
+	align-content: center;
+	margin-left: 5px;
+	color: orange;
+	font-size: 20px;
+	position: relative;
+
+}
+
+.varaibleBox {
+
+	position: absolute;
+
+	top: 1%;
+	left: 0.5%;
+
+	width: 30%;
+	height: 40%;
+
+	background: #080357;
+	border-radius: 10px;
+
+}
+
+.landingSiteBox {
+
+	position: absolute;
+
+	top: 1%;
+	left: 31.25%;
+
+	width: 68%;
+	height: 40%;
+
+	background: #19297C;
+	border-radius: 10px;
+
+}
+
+.mapBox {
+
+	position: absolute;
+
+	top: 42.25%;
+	left: 0.5%;
+
+	width: 50%;
+	height: 56.8%;
+
+	background: white;
+	border-radius: 10px;
+
+    background: #9b9fb2; /* Old browsers */
+    background: -moz-linear-gradient(top, #9b9fb2 0%, #061028 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #9b9fb2 0%,#061028 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #9b9fb2 0%,#061028 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+}
+
+
+#map {
+	
+  width: 100%;
+	height: 100%;
+}
+
+ .mapboxgl-popup-close-button {
+
+  font-size: 16px;
+  color: #fff;
+}
+
+.mapboxgl-popup-content {
+
+  padding: 20px 25px 15px 20px;
+  color: #fff;
+  background-color: #175641;
+}
+
+.mapboxgl-popup-content h3 {
+
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+
+  border-top-color: #175641;
+} 
+
+
+.smallBox1 {
+
+	position: absolute;
+
+	top: 42.25%;
+	left: 51%;
+
+	width: 48.5%;
+	height: 28%;
+
+	background: blue;
+	border-radius: 10px;
+
+}
+
+.smallBox2 {
+
+	position: absolute;
+
+	top: 71.25%;
+	left: 51%;
+
+	width: 48.5%;
+	height: 28%;
+
+	background: #05668D;
+	border-radius: 10px;
+
+}
+
+.earthPos {
+
+	position: absolute;
+
+	top: 80%;
+	left: 51%;
+
+	animation: earthSpin 5s linear infinite;
+
+}
+
+.shipPos {
+
+	position: absolute;
+
+	top: 84.75%;
+	left: 90%;
+
+	animation: moveShip 600s;
+
+}
+
+.timeTillText {
+
+	position: absolute;
+
+	top: 71.5%;
+	left: 70%;
+
+}
+
+
+.cocktailText {
+
+	position: absolute;
+
+	top: 43%;
+	left: 52.5%;
+
+}
+
+button {
+
+
+}
+
+.cocktailButton {
+
+	position: absolute;
+
+	top: 45%;
+	left: 82.5%;
+
+}
+
+
+@keyframes earthSpin {
+
+	0% {
+			transform: rotateZ(0);
+		}
+		100% {
+			transform: rotateZ(360deg);
+		}
+
+}
+
+@keyframes moveShip {
+ 
+	0% {left: 90%;}
+
+    100% {left: 50%;}
+}
