@@ -5,7 +5,7 @@ var var1 = ["High", "Medium", "Low", "Dangerous", "Brace for impact"];
 var var2 = 10;
 var var3 = [5,3,10,9,27,6,9,3,23,17,13];
 var var4 = [10,20,30,40,50,60,70,80,90,100,110,120,130];
-var var5 = "test";
+var var5 = "Safe Travels!";
 
 var var1Picker = 1;
 var var3Picker = 1;
@@ -95,6 +95,7 @@ map.addControl(
 
 // find images of places where the map is
 
+var timer600 = 0;
 
 function startUp(){
 
@@ -118,19 +119,20 @@ function startUp(){
 var center;
 function everySecond(){
 
-	if (timeLeft <= 0){
+if (timer600 < 600)
+{
 
-		landed = true;
-		document.getElementById("ship").style.visibility =="hidden";
-
-	}
-	else
-	{
-
-		timeLeft = timeLeft - 1;
+	timer600 = timer600 + 1;
+	timeLeft = timeLeft - 1;
 		document.getElementById('timeLeft').innerHTML = "Time left to Earth: " + timeLeft + "s";
 
-	}
+}
+else {
+
+	document.getElementById("ship2").style.visibility = "hidden";
+	document.getElementById('timeLeft').innerHTML = "Congrats, Successful Landing!";
+}
+
 
 
 //document.getElementById("searchButton").addEventListener("click", function() {
