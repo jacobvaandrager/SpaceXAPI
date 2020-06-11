@@ -30,6 +30,7 @@ map.addControl(
 );
 
 //get location data and find nearest restaurnts 
+// add weather data
 
 
 function startUp(){
