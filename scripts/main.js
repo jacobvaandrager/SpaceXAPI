@@ -11,7 +11,11 @@ var var1Picker = 1;
 var var3Picker = 1;
 var var4Picker = 1;
 
+var searchTerm = "black"
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiamFjb2J2YWFuZHJhZ2VyIiwiYSI6ImNrYjl2czBoMTBpMzcydWpwNGM1cjlyZ2wifQ.Pv1lJ2WHFkk4wQfH5qwa0A';
+
+let url = "";
 
 
 var map = new mapboxgl.Map({
@@ -21,16 +25,75 @@ var map = new mapboxgl.Map({
   zoom: 11.15
 });
 
+var coordinatesGeocoder = function(query) {
+// match anything which looks like a decimal degrees coordinate pair
+var matches = query.match(
+/^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
+);
+if (!matches) {
+return null;
+}
+ 
+function coordinateFeature(lng, lat) {
+return {
+center: [lng, lat],
+geometry: {
+type: 'Point',
+coordinates: [lng, lat]
+},
+place_name: 'Lat: ' + lat + ' Lng: ' + lng,
+place_type: ['coordinate'],
+properties: {},
+type: 'Feature'
+};
+}
+ 
+var coord1 = Number(matches[1]);
+var coord2 = Number(matches[2]);
+var geocodes = [];
+ 
+if (coord1 < -90 || coord1 > 90) {
+// must be lng, lat
+geocodes.push(coordinateFeature(coord1, coord2));
+}
+ 
+if (coord2 < -90 || coord2 > 90) {
+// must be lat, lng
+geocodes.push(coordinateFeature(coord2, coord1));
+}
+ 
+if (geocodes.length === 0) {
+// else could be either lng, lat or lat, lng
+geocodes.push(coordinateFeature(coord1, coord2));
+geocodes.push(coordinateFeature(coord2, coord1));
+}
+ 
+return geocodes;
+};
+
 map.addControl(
   new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
+    localGeocoder: coordinatesGeocoder,
     mapboxgl: mapboxgl
+ 
   }),
   'top-left'
 );
 
-//get location data and find nearest restaurnts 
-// add weather data
+/*function getReverseGeocode(feature) {
+    var lat = feature.geometry.coordinates[0];
+    var lng = feature.geometry.coordinates[1];
+    var url = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + lat + "," + lng + ".json?access_token=" + mapboxgl.accessToken;
+    $.get(url, function(data){
+        var myData = data;
+        doAThing(data);
+        console.log(myData);
+    });
+    }
+*/
+
+// find images of places where the map is
 
 
 function startUp(){
@@ -51,6 +114,8 @@ function startUp(){
 }
 
 
+
+var center;
 function everySecond(){
 
 	if (timeLeft <= 0){
@@ -67,7 +132,42 @@ function everySecond(){
 
 	}
 
+
+//document.getElementById("searchButton").addEventListener("click", function() {
+      let accessKey = "aJ3pbVZjSd3hYPGrDZQMpQFUe3WCKjMP4o2yU__2QZ4";
+     // let searchTerm = document.getElementById("search").innerHTML;
+     // searchTerm = "berlin";
+
+      //let nextPage = 1;
+
+      let urlPics = "https://api.unsplash.com/search/photos?client_id=" +accessKey + "&page=1&query=" + searchTerm;
+      // Request
+
+      fetch(urlPics)
+        .then(function(data) {
+          return data.json();
+        })
+        .then(function(data) {
+        	//console.log("working");
+         // console.log(data);
+
+         // var imsrc = JSON.stringify(data)
+
+         // console.log(imsrc);
+
+          var imgLink = data.results[0].urls.regular;
+         // console.log(imgLink);
+
+          
+         document.getElementById("landingSite").src = imgLink;
+
+        });
+   // })
+;
+
+
 }
+
 
 function every5Seconds(){
 
@@ -90,10 +190,73 @@ function every4Seconds(){
 function every6Seconds(){
 
 	var4Picker = Math.floor(Math.random()*11);
-	console.log(var4Picker);
+	
 	document.getElementById('var4').innerHTML = "Acceleration: " + var4[var4Picker] +"m/s";
+
+}
+
+function SearchPhotos() {
+
+
+
+}
+
+function linkImageMap() {
+
+	/*center = map.getCenter();
+
+	var lat = map.getCenter().lat;
+	var long = map.getCenter().lng;
+	// access longitude and latitude values directly
+	var {longitude, latitude} = map.getCenter();
+
+	console.log(center);
+*/
+	/*var NewMapCenter = map.getCenter();
+	console.log(NewMapCenter);
+	var latitude1 = NewMapCenter.lat();
+	var longitude1 = NewMapCenter.lng();
+	console.log(NewMapCenter);
+*/
+var NewMapCenter = map.getCenter();
+	var real = mapboxgl.LngLat.convert(NewMapCenter);
+//console.log(real);
+
+
+	let URLpos = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + String(real.lng) + "," + String(real.lat) + ".json?access_token=pk.eyJ1IjoiamFjb2J2YWFuZHJhZ2VyIiwiYSI6ImNrYjl2czBoMTBpMzcydWpwNGM1cjlyZ2wifQ.Pv1lJ2WHFkk4wQfH5qwa0A";
+//console.log(URLpos);
+//let URLpos = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + String(0.1278) + "," + String(51.5074) + ".json?access_token=pk.eyJ1IjoiamFjb2J2YWFuZHJhZ2VyIiwiYSI6ImNrYjl2czBoMTBpMzcydWpwNGM1cjlyZ2wifQ.Pv1lJ2WHFkk4wQfH5qwa0A";
+	fetch(URLpos)
+		.then(function(data){
+			return data.json();
+		})
+		.then(function(data)
+		{
+
+
+	     var posSRC = JSON.stringify(data);
+
+	     console.log(data);
+
+	     searchTerm = data.features[0].place_name;
+	    // console.log(searchTerm);
+
+		});
+
+
+}
+
+document.getElementById("generate").onclick = function(){
+
+linkImageMap();
 
 }
 
 
 startUp();
+
+
+
+
+ 
+

@@ -22,6 +22,9 @@
 
         <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" />
 
+ 			<!-- Decoder assets -->
+        <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+
 	</head>
 
 	<body>
@@ -37,7 +40,8 @@
 			</div>
 
 			<div class = "landingSiteBox">
-	
+				<img src="" id = "landingSite" height = "100%" width = "100%">
+				 <p id="result"></p>
 			</div>
 
 			<div class = "mapBox">
@@ -66,13 +70,15 @@
 			<h2>ADD TEXT HERE</h2>
 			</div>
 
-			<div class = "cocktailButton">
+			<div class = "cocktailButton" id="generate">
 			<button>Random</button>
 			</div>
 			
 			<div class = "shipPos">
-			<img src = "images/spacexrocket.png" alt = "Ship" width = "100px" height = "20px" id = "ship">
+			<img1 src = "images/spacexrocket.png" alt = "Ship" width = "100px" height = "20px" id = "ship">
 			</div>
+
+			
 
 	</body>
 
