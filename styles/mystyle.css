@@ -209,14 +209,11 @@ button {
 
   	font-family: 'Inter', sans-serif;
 
-	
-	
-
 }
 
 button:hover {
 
-	background-color: orange; /* Green */
+	background-color: orange;
 	color: black;
 }
 
@@ -246,4 +243,5 @@ button:hover {
 	0% {left: 90%;}
 
     100% {left: 50%;}
+    
 }
